@@ -1,0 +1,27 @@
+.boxDisplay{
+    width: 80%; /* Set the width to 80% of the viewport */
+    max-width: 400px;
+    margin: auto; /* Center the sections horizontally */
+    text-align: center;
+    border: 2px solid #534741; /* Dark brown border to match the page theme */
+    border-radius: 10px; /* Rounded corners for a softer look */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Use rgba for a semi-transparent background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .boxDisplay {
+        width: 90%; /* Adjust the width for smaller screens */
+        max-width: none; /* Remove max-width for smaller screens */
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+}
+
+/* Responsive Styles for Smaller Screens (e.g., less than 480px) */
+@media (max-width: 480px) {
+    .boxDisplay {
+        width: 95%; /* Further reduce the width for even smaller screens */
+    }
+}

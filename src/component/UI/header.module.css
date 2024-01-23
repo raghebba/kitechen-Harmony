@@ -1,0 +1,13 @@
+header {
+    background-color: rgba(255, 255, 255, 0.8); /* Use rgba for a semi-transparent background */
+    text-align: center;
+    padding: 20px;
+    color: #534741; /* Dark brown for better contrast on mixed white and brown background */
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 10px; /* Reduce padding for smaller screens */
+        font-size: 18px; /* Adjust font size for smaller screens */
+    }
+}

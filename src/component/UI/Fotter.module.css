@@ -1,0 +1,16 @@
+footer {
+    background-color: rgba(0, 0, 0, 0.8); /* Use rgba for a semi-transparent background */
+    color: #fff; /* Set the font color to white for better readability */
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    footer {
+        font-size: 14px; /* Adjust font size for smaller screens */
+        padding: 5px; /* Reduce padding for smaller screens */
+    }
+}

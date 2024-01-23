@@ -1,0 +1,14 @@
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Make the main section take up the full height of the viewport */
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    section {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+    }
+}
