@@ -1,11 +1,11 @@
 import React from "react";
-import { useLanguage } from "../../contextAPI/languageContext";
+import { useAppContext } from "../../contextAPI/languageContext";
 import Ingredients from "../ingredients/ingredients-section";
 import LanguageSelector from "../Languges/languagesselector";
 import "./main-section.module.css"
 
 const Mainsection = () => {
-  const { selectedLanguage, handleLanguageChange } = useLanguage();
+  const { selectedLanguage, handleLanguageChange } = useAppContext();
 
 
   return (

@@ -1,22 +1,28 @@
-import {useState,createContext,useContext} from "react"
+import React, { createContext, useContext, useState } from 'react';
 
+const AppContext = createContext();
 
-const LanguageContext = createContext()
+export function AppProvider({ children }) {
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const [theme, setTheme] = useState('light'); // Example: Managing theme state
 
-export function LanguageProvider ({children}){
-    const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const handleLanguageChange = (language) => {
+    setSelectedLanguage(language);
+    // Handle language change logic
+  };
 
-    const handleLanguageChange = (language) => {
-      setSelectedLanguage(language);
-      // You can add code here to handle language change and update your app's language settings.
-    };
-    return (
-        <LanguageContext.Provider value={{ selectedLanguage, handleLanguageChange }}>
-          {children}
-        </LanguageContext.Provider>
-      );
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    // Handle theme toggling logic
+  };
+
+  return (
+    <AppContext.Provider value={{ selectedLanguage, handleLanguageChange, theme, toggleTheme }}>
+      {children}
+    </AppContext.Provider>
+  );
 }
 
-export function useLanguage() {
-    return useContext(LanguageContext);
-  }
+export function useAppContext() {
+  return useContext(AppContext);
+}
