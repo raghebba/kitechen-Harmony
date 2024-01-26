@@ -1,5 +1,7 @@
-import React from 'react';
-import BoxDisplay from '../UI/boxDisplay';
+import React from "react";
+import BoxDisplay from "../UI/boxDisplay";
+import FlagIcon from "../UI/flagfactory";
+import styles from "./languageselector.module.css";
 
 function LanguageSelector({ selectedLanguage, onLanguageChange }) {
   return (
@@ -7,22 +9,31 @@ function LanguageSelector({ selectedLanguage, onLanguageChange }) {
       <h3>Select a Language:</h3>
       <div className="flag-container">
         <button
-          className={`flag ${selectedLanguage === 'british' ? 'selected' : ''}`}
-          onClick={() => onLanguageChange('british')}
+          className={
+            `flag ${selectedLanguage === "british" ? "selected" : ""}` +
+            styles.languageButton
+          }
+          onClick={() => onLanguageChange("british")}
         >
-          🇬🇧 British
+          <FlagIcon code="gb" size="lg" /> 
         </button>
         <button
-          className={`flag ${selectedLanguage === 'french' ? 'selected' : ''}`}
-          onClick={() => onLanguageChange('french')}
+          className={
+            `flag ${selectedLanguage === "french" ? "selected" : ""}` +
+            styles.languageButton
+          }
+          onClick={() => onLanguageChange("french")}
         >
-          🇫🇷 French
+          <FlagIcon code="fr" size="lg" />
         </button>
         <button
-          className={`flag ${selectedLanguage === 'tunisian' ? 'selected' : ''}`}
-          onClick={() => onLanguageChange('tunisian')}
+          className={
+            `flag ${selectedLanguage === "tunisian" ? "selected" : ""}` +
+            styles.languageButton
+          }
+          onClick={() => onLanguageChange("tunisian")}
         >
-          🇹🇳 Tunisian
+          <FlagIcon code="tn" size="lg" />
         </button>
       </div>
     </BoxDisplay>

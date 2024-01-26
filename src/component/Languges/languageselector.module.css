@@ -1,0 +1,42 @@
+.languageButton {
+    background-color: #4caf50; /* Adjust color to match your scheme */
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px; /* Larger font size for better readability */
+    color: #333; /* Dark text for contrast */
+    text-align: center;
+}
+
+.languageButton:hover {
+    background-color: #45a049; /* Lighter shade for hover state */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    color: #000; /* Slightly darker text on hover */
+    text-decoration: underline;
+}
+
+.languageButton.active {
+    border: 2px solid #4CAF50; /* Highlight color for active state */
+}
+
+.alertbox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 400px;
+    display: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.alert-box.visible {
+    display: block;
+  }

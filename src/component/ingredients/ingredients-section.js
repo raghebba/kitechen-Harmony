@@ -2,32 +2,14 @@ import React from "react";
 import "./ingredients-section.module.css";
 import BoxDisplay from "../UI/boxDisplay";
 import { useAppContext } from "../../contextAPI/languageContext";
+import  {Translations}  from "./ingredientsData";
 
 const Ingredients = () => {
 
-  const translations = {
-    british: {
-      title: "What's in your kitchen?",
-      description: "Enter your ingredients below and discover your next meal:",
-      placeholder: "Enter ingredients",
-      buttonText: "Discover",
-    },
-    french: {
-      title: "Qu'y a-t-il dans votre cuisine ?",
-      description: "Entrez vos ingrédients ci-dessous et découvrez votre prochain repas :",
-      placeholder: "Entrez les ingrédients",
-      buttonText: "Découvrir",
-    },
-    tunisian: {
-      title: "شنو عندك في كوجينتك؟",
-      description: "ادخل مكوناتك تحت واكتشف الوجبة الجديدة:",
-      placeholder: "ادخل المكونات",
-      buttonText: "اكتشاف",
-    },
-  };
+
   const {selectedLanguage } = useAppContext()
   
-const translation = translations[selectedLanguage] || translations['british']
+const translation = Translations[selectedLanguage] || Translations['british']
   return (
     <BoxDisplay>
       <h2>{translation.title}</h2>
