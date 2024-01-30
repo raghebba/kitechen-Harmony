@@ -11,6 +11,9 @@ export function AppProvider({ children }) {
   const [recipeSuggestion, setRecipeSuggestion] = useState(``);
   const [ingredients, setIngredients] = useState("");
   const [renderCount, setRenderCount] = useState(0);
+  const [isLoading,setLoading] = useState(false)
+
+
 
   useEffect(() => {
     if (selectedLanguage) {
@@ -19,6 +22,8 @@ export function AppProvider({ children }) {
   }, [selectedLanguage]);
 
   const fetchRecipes = (ingredients) => {
+    setLoading(true)
+
     const payload = {
       user_input: ingredients,
       conversation_history: [], // Add actual conversation history if needed
@@ -35,6 +40,9 @@ export function AppProvider({ children }) {
       })
       .catch((error) => {
         console.error("Error:", error);
+      })
+      .finally(() => {
+        setLoading(false); // Set isLoading to false when fetch is completed
       });
   };
 
@@ -67,7 +75,8 @@ export function AppProvider({ children }) {
         recipeSuggestion,
         fetchRecipes,
         updateInitialIngredients,
-        renderCount
+        renderCount,
+        isLoading
       }}
     >
       {children}

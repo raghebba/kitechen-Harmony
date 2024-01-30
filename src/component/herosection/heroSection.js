@@ -1,5 +1,6 @@
 import React,{useEffect,useRef} from "react";
 import { useAppContext } from "../../contextAPI/languageContext";
+import Loading from "../UI/Loading";
 import Ingredients from "./ingredients/ingredients-section";
 
 
@@ -7,7 +8,7 @@ import Ingredients from "./ingredients/ingredients-section";
 
 const Herosection = () =>{
 
-    const { recipeSuggestion } = useAppContext();
+    const { recipeSuggestion,isLoading } = useAppContext();
 
     const RenderCounter = useRef(0)
       
@@ -15,12 +16,12 @@ const Herosection = () =>{
       RenderCounter.current = RenderCounter.current + 1;
       console.log(`Rendered ${RenderCounter.current} times`);
      })
-     
+     console.log(recipeSuggestion)
    
     
     return(
         <section>
-            {recipeSuggestion === '' ? "loading" :<Ingredients /> }
+         { isLoading  ? <Loading /> :<Ingredients /> }
          
         </section>
     )
