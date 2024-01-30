@@ -1,13 +1,17 @@
 import React from "react";
 import "./ingredients-section.module.css";
-import BoxDisplay from "../UI/boxDisplay";
-import { useAppContext } from "../../contextAPI/languageContext";
-import  {Translations}  from "./ingredientsData";
+import BoxDisplay from "../../UI/boxDisplay";
+import { useAppContext } from "../../../contextAPI/languageContext";
+import  { Translations}  from "./ingredientsData";
+
 
 const Ingredients = () => {
-
+  
 
   const {selectedLanguage } = useAppContext()
+    
+
+
   
 const translation = Translations[selectedLanguage] || Translations['british']
   return (
