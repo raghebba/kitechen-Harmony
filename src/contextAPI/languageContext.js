@@ -1,7 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Initialprompt } from "../component/herosection/ingredients/ingredientsData";
-import LanguageSelector from "../component/Languges/languagesselector";
-
 
 const AppContext = createContext();
 
@@ -11,18 +9,17 @@ export function AppProvider({ children }) {
   const [recipeSuggestion, setRecipeSuggestion] = useState(``);
   const [ingredients, setIngredients] = useState("");
   const [renderCount, setRenderCount] = useState(0);
-  const [isLoading,setLoading] = useState(false)
-
-
+  const [isLoading, setLoading] = useState(false);
+  const [isalergies, setAlergies] = useState("");
 
   useEffect(() => {
-    if (selectedLanguage) {
+    if (selectedLanguage && isalergies) {
       fetchRecipes(Initialprompt[selectedLanguage]);
     }
-  }, [selectedLanguage]);
+  }, [selectedLanguage, isalergies]); // fetch the bot when the language and allergies are change is change
 
   const fetchRecipes = (ingredients) => {
-    setLoading(true)
+    setLoading(true);
 
     const payload = {
       user_input: ingredients,
@@ -52,7 +49,7 @@ export function AppProvider({ children }) {
 
   const handleLanguageChange = (language) => {
     setSelectedLanguage(language);
-    fetchRecipes(Initialprompt[LanguageSelector])
+    // fetchRecipes(Initialprompt[LanguageSelector])
   };
 
   const toggleTheme = () => {
@@ -63,7 +60,6 @@ export function AppProvider({ children }) {
   useEffect(() => {
     setRenderCount((prevCount) => prevCount + 1);
   }, [ingredients]);
-
 
   return (
     <AppContext.Provider
@@ -76,7 +72,9 @@ export function AppProvider({ children }) {
         fetchRecipes,
         updateInitialIngredients,
         renderCount,
-        isLoading
+        isLoading,
+        isalergies,
+        setAlergies,
       }}
     >
       {children}

@@ -1,26 +1,25 @@
 import React from "react";
 import { useAppContext } from "../../contextAPI/languageContext";
+import Alergies from "../alergiesSelection/alergies";
 import Herosection from "../herosection/heroSection";
 import LanguageSelector from "../Languges/languagesselector";
 import "./main-section.module.css";
 
 const Mainsection = () => {
-  const {
-    selectedLanguage,
-    handleLanguageChange,
-  } = useAppContext();
-
+  const { selectedLanguage, handleLanguageChange, isalergies } =
+    useAppContext();
 
   return (
     <section>
-      {!selectedLanguage ? (
+      {!selectedLanguage && (
         <LanguageSelector
           onLanguageChange={handleLanguageChange}
           selectedLanguage={selectedLanguage}
         />
-      ) : (
-        <Herosection />
       )}
+
+      {selectedLanguage && !isalergies && (<Alergies />)}
+      {selectedLanguage && isalergies && (<Herosection />)}
     </section>
   );
 };

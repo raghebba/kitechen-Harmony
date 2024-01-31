@@ -8,7 +8,7 @@ import Ingredients from "./ingredients/ingredients-section";
 
 const Herosection = () =>{
 
-    const { recipeSuggestion,isLoading } = useAppContext();
+    const { recipeSuggestion,isLoading,isalergies } = useAppContext();
 
     const RenderCounter = useRef(0)
       
@@ -17,6 +17,7 @@ const Herosection = () =>{
       console.log(`Rendered ${RenderCounter.current} times`);
      })
      console.log(recipeSuggestion)
+     console.log(isalergies)
    
     
     return(
