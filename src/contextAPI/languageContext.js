@@ -11,19 +11,20 @@ export function AppProvider({ children }) {
   const [renderCount, setRenderCount] = useState(0);
   const [isLoading, setLoading] = useState(false);
   const [isalergies, setAlergies] = useState("");
+  const [converstationHistory, setConverstationHistory] = useState([]);
 
   useEffect(() => {
-    if (selectedLanguage && isalergies) {
+    if (selectedLanguage) {
       fetchRecipes(Initialprompt[selectedLanguage]);
     }
-  }, [selectedLanguage, isalergies]); // fetch the bot when the language and allergies are change is change
+  }, [selectedLanguage]); // fetch the bot when the language  are change
 
-  const fetchRecipes = (ingredients) => {
+  const fetchRecipes = (ingredients, converstationHistory) => {
     setLoading(true);
 
     const payload = {
       user_input: ingredients,
-      conversation_history: [], // Add actual conversation history if needed
+      conversation_history: converstationHistory,
     };
 
     fetch("http://127.0.0.1:5000/chat", {
@@ -34,6 +35,7 @@ export function AppProvider({ children }) {
       .then((response) => response.json())
       .then((data) => {
         setRecipeSuggestion(data.response);
+        setConverstationHistory(data.conversation_history);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -49,12 +51,23 @@ export function AppProvider({ children }) {
 
   const handleLanguageChange = (language) => {
     setSelectedLanguage(language);
-    // fetchRecipes(Initialprompt[LanguageSelector])
+    fetchRecipes(Initialprompt[selectedLanguage]);
   };
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
     // Handle theme toggling logic
+  };
+  const updatedconverstationHistory = (newMessage) => {
+    setConverstationHistory((prevHistory) => [...prevHistory, newMessage]);
+  };
+
+  const handelSumbit = (e) => {
+    console.log("Form submitted with value:", e);
+    setConverstationHistory([
+      ...converstationHistory,
+      { content: e, role: "user" },
+    ]);
   };
 
   useEffect(() => {
@@ -73,8 +86,12 @@ export function AppProvider({ children }) {
         updateInitialIngredients,
         renderCount,
         isLoading,
+        setLoading,
         isalergies,
         setAlergies,
+        updatedconverstationHistory,
+        converstationHistory,
+        handelSumbit,
       }}
     >
       {children}
