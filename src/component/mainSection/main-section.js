@@ -7,10 +7,9 @@ import Loading from "../UI/Loading";
 import "./main-section.module.css";
 
 const Mainsection = () => {
-  const { selectedLanguage, handleLanguageChange, isalergies,isLoading,converstationHistory } =
+  const { selectedLanguage, handleLanguageChange, isalergies,isLoading } =
     useAppContext();
-    console.log(converstationHistory)
-
+   
     return (
       isLoading ? (
         <Loading />

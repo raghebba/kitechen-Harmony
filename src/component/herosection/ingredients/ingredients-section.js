@@ -9,28 +9,27 @@ const Ingredients = () => {
   const {
     selectedLanguage,
     isalergies,
-    setAlergies,
     converstationHistory,
     updatedconverstationHistory,
     setLoading,
     handelSumbit,
     updateInitialIngredients,
-   
+    setRecipeSuggestion
   } = useAppContext();
 
-  console.log(setInput)
+  
+
   const onhandleSumbit = async (event) => {
     event.preventDefault();
 
     // Update the conversation history with the user input
     updatedconverstationHistory({
       role: "user",
-      content: isInput,
+      content: `${isalergies} and ${isInput}`,
     });
 
     // Set isLoading to true to show the loading indicator
     setLoading(true);
-    setAlergies(isInput);
     handelSumbit(isInput);
     updateInitialIngredients(isInput)
     // Call the backend API and get the bot's response
@@ -38,13 +37,15 @@ const Ingredients = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        user_input: isInput,
+        user_input: `${isalergies} and ${isInput}`,
         conversation_history: converstationHistory,
       }),
     });
 
     if (response.ok) {
       const responseData = await response.json();
+      //update recipesSuggestion
+      setRecipeSuggestion(responseData)
       // Update the conversation history with the bot's response
       updatedconverstationHistory({
         role: "assistant",

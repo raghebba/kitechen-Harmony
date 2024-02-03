@@ -63,7 +63,6 @@ export function AppProvider({ children }) {
   };
 
   const handelSumbit = (e) => {
-    console.log("Form submitted with value:", e);
     setConverstationHistory([
       ...converstationHistory,
       { content: e, role: "user" },
@@ -81,6 +80,7 @@ export function AppProvider({ children }) {
         handleLanguageChange,
         theme,
         toggleTheme,
+        setRecipeSuggestion,
         recipeSuggestion,
         fetchRecipes,
         updateInitialIngredients,
