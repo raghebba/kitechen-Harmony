@@ -5,14 +5,7 @@ import { AlergiesTranslation } from "./alegiesData";
 import "./alergies.module.css";
 
 const Alergies = () => {
-  const {
-    selectedLanguage,
-    handelSumbit,
-    setAlergies,
-    updatedconverstationHistory,
-    converstationHistory,
-    setLoading,
-  } = useAppContext();
+  const { selectedLanguage, setAlergies } = useAppContext();
   const [isInput, setInput] = useState("");
 
   const translation =
@@ -22,13 +15,14 @@ const Alergies = () => {
     event.preventDefault();
 
     // Update the conversation history with the user input
-    updatedconverstationHistory({ role: "user", content: setInput });
+    // updatedconverstationHistory({ role: "user", content: setInput });
 
     // Set isLoading to true to show the loading indicator
-    setLoading(true);
+    //setLoading(true);
     setAlergies(isInput);
-    handelSumbit(isInput);
+    //handelSumbit(isInput);
     // Call the backend API and get the bot's response
+    /*
     const response = await fetch("http://localhost:5000/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -51,10 +45,12 @@ const Alergies = () => {
     }
 
     // Clear the input field after submission
-    setInput("")
+  
 
     // Set isLoading back to false after receiving the response
     setLoading(false);
+    */
+    setInput("");
   };
 
   const handleInputChange = (e) => {

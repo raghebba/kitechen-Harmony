@@ -84,6 +84,7 @@ export function AppProvider({ children }) {
         recipeSuggestion,
         fetchRecipes,
         updateInitialIngredients,
+        ingredients,
         renderCount,
         isLoading,
         setLoading,
