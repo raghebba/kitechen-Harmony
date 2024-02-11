@@ -3,6 +3,7 @@ header {
     text-align: center;
     padding: 20px;
     color: #534741; /* Dark brown for better contrast on mixed white and brown background */
+    position: relative;
 }
 
 @media (max-width: 768px) {

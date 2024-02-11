@@ -1,12 +1,21 @@
-import React from "react"
-import styles from "./boxDisplay.module.css"
+import React from "react";
+import styles from "./boxDisplay.module.css";
 
 const BoxDisplay = (props) => {
-    return(
-        <div className={styles.boxDisplay}>
-            {props.children}
-        </div>
-    )
-}
+  const instyles = {
+    direction: "rtl",
+    textAlign: "right",
+  };
+  const combinedStyles = props.language === "tunisian" ? instyles : {};
 
-export default BoxDisplay
+  return (
+    <div
+      style={combinedStyles}
+      className={styles.boxDisplay}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+export default BoxDisplay;

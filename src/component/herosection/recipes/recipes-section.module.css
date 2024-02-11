@@ -1,6 +1,15 @@
-
-
 .title {
     margin-top: 0;
     text-align: center;
+}
+
+
+.boxes {
+        margin-top: 1em;
+        margin-bottom: 1em;
+}
+
+.boxes:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }

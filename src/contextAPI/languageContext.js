@@ -12,6 +12,8 @@ export function AppProvider({ children }) {
   const [isLoading, setLoading] = useState(false);
   const [isalergies, setAlergies] = useState("");
   const [converstationHistory, setConverstationHistory] = useState([]);
+  const [dishNamesArray, setDishNamesArray] = useState([]);
+  const [finalRecipes, setfinalRecipes] = useState("");
 
   useEffect(() => {
     if (selectedLanguage) {
@@ -43,6 +45,47 @@ export function AppProvider({ children }) {
       .finally(() => {
         setLoading(false); // Set isLoading to false when fetch is completed
       });
+  };
+
+  const fetchRecipesSuggestion = async (inputVal) => {
+
+   const languageRealtor = {british: "and" ,french: "et" , tunisian: "و "}
+
+    updatedconverstationHistory({
+      role: "user",
+      content: !dishNamesArray.length ? `${isalergies} ${languageRealtor[selectedLanguage]} ${inputVal}` : `${inputVal}`,
+    });
+
+    setLoading(true);
+
+    const response = await fetch("http://localhost:5000/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_input:  !dishNamesArray.length ? `${isalergies} and ${inputVal}` : `${inputVal}`,
+        conversation_history: converstationHistory,
+      }),
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      //update recipesSuggestion
+      if(!dishNamesArray.length){
+        setRecipeSuggestion(responseData);
+      }else{
+        setfinalRecipes(responseData)
+      }
+ 
+      // Update the conversation history with the bot's response
+      updatedconverstationHistory({
+        role: "assistant",
+        content: responseData.response,
+      });
+    } else {
+      // Handle error if the API request fails
+      console.error("API request failed");
+    }
+    setLoading(false);
   };
 
   const updateInitialIngredients = (newIngredients) => {
@@ -93,6 +136,11 @@ export function AppProvider({ children }) {
         updatedconverstationHistory,
         converstationHistory,
         handelSumbit,
+        fetchRecipesSuggestion,
+        dishNamesArray,
+        setDishNamesArray,
+        finalRecipes, 
+        setfinalRecipes
       }}
     >
       {children}

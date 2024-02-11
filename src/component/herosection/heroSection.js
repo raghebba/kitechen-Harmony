@@ -9,6 +9,7 @@ const Herosection = () => {
 
   const RenderCounter = useRef(0);
 
+
   useEffect(() => {
     RenderCounter.current = RenderCounter.current + 1;
     //console.log(`Rendered ${RenderCounter.current} times`);
