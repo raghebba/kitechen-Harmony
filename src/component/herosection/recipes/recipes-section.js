@@ -44,7 +44,9 @@ const Recipes = () => {
     });
     setDishNamesArray(Object.values(dishTitles));
   }, [recipeSuggestion, setDishNamesArray]);
+    
 
+console.log(recipeSuggestion)
   return (
     <div>
       <BoxDisplay>
