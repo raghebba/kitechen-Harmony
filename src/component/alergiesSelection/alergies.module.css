@@ -28,3 +28,16 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+.SeconderyButton{
+    padding: 10px;
+    background-color: transparent;
+    color: #4caf50;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 6px;
+}
+
+.SeconderyButton:hover{
+    background-color: aliceblue;
+}

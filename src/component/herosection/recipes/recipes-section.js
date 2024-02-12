@@ -5,6 +5,7 @@ import { useAppContext } from "../../../contextAPI/languageContext";
 import { useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import ChosenRecipes from "./chosenRecipes";
+import ErrorBoundary from "../../UI/ErrorBoundry";
 
 const Recipes = () => {
   const {
@@ -14,6 +15,7 @@ const Recipes = () => {
     setDishNamesArray,
     finalRecipes,
     fetchRecipesSuggestion,
+    setfinalRecipes,
   } = useAppContext();
 
   const ChosenTitle = {
@@ -23,39 +25,50 @@ const Recipes = () => {
   };
 
   useEffect(() => {
-    const lines = recipeSuggestion.response.split('\n');
-    
+    const lines = recipeSuggestion.response.split("\n");
+
     // Filter lines that contain dish titles, assuming they start with a number followed by a period
-    const dishTitleLines = lines.filter(line => line.match(/^\d+\./));
-    
+    const dishTitleLines = lines.filter((line) => line.match(/^\d+\./));
+
     // Extract the dish names from the filtered lines, considering the bold syntax
-    const dishTitles = dishTitleLines.map(line => {
-        // Find the start and end indices of the bold markers
-        const startBoldIndex = line.indexOf('**');
-        const endBoldIndex = line.lastIndexOf('**');
-        
-        // Extract the dish name by removing the numbering, bold markers, and trimming whitespace
-        // Check for the presence of bold markers before extracting
-        if (startBoldIndex !== -1 && endBoldIndex !== -1 && startBoldIndex !== endBoldIndex) {
-            return line.substring(startBoldIndex + 2, endBoldIndex).trim();
-        }
-        // Fallback in case the bold markers are not found or improperly formatted
-        return line.substring(line.indexOf('.') + 1).trim();
+    const dishTitles = dishTitleLines.map((line) => {
+      // Find the start and end indices of the bold markers
+      const startBoldIndex = line.indexOf("**");
+      const endBoldIndex = line.lastIndexOf("**");
+
+      // Extract the dish name by removing the numbering, bold markers, and trimming whitespace
+      // Check for the presence of bold markers before extracting
+      if (
+        startBoldIndex !== -1 &&
+        endBoldIndex !== -1 &&
+        startBoldIndex !== endBoldIndex
+      ) {
+        return line.substring(startBoldIndex + 2, endBoldIndex).trim();
+      }
+      // Fallback in case the bold markers are not found or improperly formatted
+      return line.substring(line.indexOf(".") + 1).trim();
     });
     setDishNamesArray(Object.values(dishTitles));
   }, [recipeSuggestion, setDishNamesArray]);
-    
 
-console.log(recipeSuggestion)
+  const onbacktoRecipes = () => {
+    setfinalRecipes("");
+  };
+
   return (
     <div>
       <BoxDisplay>
         <h2 className={Styles.title}>{ChosenTitle[selectedLanguage]}</h2>
         {finalRecipes ? (
-        <ChosenRecipes recipeString={finalRecipes.response} /> 
-        //<BoxDisplay>{finalRecipes.response}</BoxDisplay>
+          <ErrorBoundary>
+            <ChosenRecipes
+              recipeString={finalRecipes.response}
+              Backtorecipes={onbacktoRecipes}
+            />
+          </ErrorBoundary>
         ) : (
-          dishNamesArray.map((dish) => (
+          //<BoxDisplay>{finalRecipes.response}</BoxDisplay>
+          dishNamesArray.map((dish, index) => (
             <div
               onClick={() => {
                 fetchRecipesSuggestion(dish);
@@ -63,11 +76,11 @@ console.log(recipeSuggestion)
               }}
               className={Styles.boxes}
               key={uuid()}
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               <BoxDisplay>{dish}</BoxDisplay>
             </div>
           ))
-          
         )}
       </BoxDisplay>
     </div>

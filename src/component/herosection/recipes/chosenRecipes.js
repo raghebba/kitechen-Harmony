@@ -8,7 +8,7 @@ import {
   parseRecipeStringFr,
 } from "./recipesLogic";
 
-const ChosenRecipes = ({ recipeString }) => {
+const ChosenRecipes = ({ recipeString ,Backtorecipes}) => {
   const [recipeData, setRecipeData] = useState(null);
   const [langugeselection, setlangugeselection] = useState({});
   const { selectedLanguage } = useAppContext();
@@ -32,7 +32,7 @@ const ChosenRecipes = ({ recipeString }) => {
   if (!recipeData) {
     return <div>Loading...</div>; // You can render a loading indicator while parsing the data.
   }
-console.log(recipeData)
+
   return (
     <BoxDisplay language={selectedLanguage}>
       <h2>{recipeData.title}</h2>
@@ -52,6 +52,7 @@ console.log(recipeData)
           ))}
         </ol>
       </div>
+      <button onClick={Backtorecipes}>{langugeselection.Back}</button>
     </BoxDisplay>
   );
 };

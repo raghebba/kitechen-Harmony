@@ -8,7 +8,17 @@
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8); /* Use rgba for a semi-transparent background */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    animation: fadeIn 1s ease-out forwards;
 }
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 
 /* Responsive Styles */
 @media (max-width: 768px) {

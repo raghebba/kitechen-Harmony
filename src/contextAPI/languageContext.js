@@ -15,6 +15,9 @@ export function AppProvider({ children }) {
   const [dishNamesArray, setDishNamesArray] = useState([]);
   const [finalRecipes, setfinalRecipes] = useState("");
 
+
+  
+
   useEffect(() => {
     if (selectedLanguage) {
       fetchRecipes(Initialprompt[selectedLanguage]);
@@ -29,7 +32,7 @@ export function AppProvider({ children }) {
       conversation_history: converstationHistory,
     };
 
-    fetch("http://127.0.0.1:5000/chat", {
+    fetch(process.env.REACT_APP_API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -53,12 +56,13 @@ export function AppProvider({ children }) {
 
     updatedconverstationHistory({
       role: "user",
+      //condinitional Statment to determine if the user will use the fetch request for recipe-section form or chosing a final recipes
       content: !dishNamesArray.length ? `${isalergies} ${languageRealtor[selectedLanguage]} ${inputVal}` : `${inputVal}`,
     });
 
     setLoading(true);
 
-    const response = await fetch("http://localhost:5000/chat", {
+    const response = await fetch(process.env.REACT_APP_API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
